@@ -1,0 +1,1135 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/..\FrameXML\UI.xsd">
+	<Button name="RIO_GuildHeader" virtual="true">
+		<Scripts>
+			<OnClick>
+				RIOMain_Browser.sortTable(self:GetID());
+				RIOMain_Browser.updateListing();
+			</OnClick>
+			<OnEnter>
+				_G[self:GetName().."BG"]:SetVertexColor(1, 1, 1, 1)
+			</OnEnter>
+			<OnLeave>
+				_G[self:GetName().."BG"]:SetVertexColor(0.7, 0.7, 0.7, 0.7)
+			</OnLeave>
+			<OnLoad>
+				self:GetScript("OnLeave")(self)
+			</OnLoad>
+		</Scripts>
+		<NormalTexture name="$parentBG">
+			<Color r="0.4" g="0.4" b="0.04" a="0.4" />
+		</NormalTexture>
+		<ButtonText>
+			<Anchors>
+				<Anchor point="LEFT">
+					<Offset>
+						<AbsDimension x="4" y="0" />
+					</Offset>
+				</Anchor>
+			</Anchors>
+		</ButtonText>
+		<NormalFont style="GameFontHighlight" />
+		<HighlightFont style="GameFontNormal" />
+	</Button>
+	<Button name="RIO_CodeHeader" virtual="true">
+			<Scripts>
+				<OnEnter>
+					_G[self:GetName().."BG"]:SetVertexColor(1, 1, 1, 1)
+				</OnEnter>
+				<OnLeave>
+					_G[self:GetName().."BG"]:SetVertexColor(0.7, 0.7, 0.7, 0.7)
+				</OnLeave>
+				<OnLoad>
+					self:GetScript("OnLeave")(self)
+				</OnLoad>
+			</Scripts>
+			<NormalTexture name="$parentBG">
+				<Color r="0.4" g="0.4" b="0.04" a="0.4" />
+			</NormalTexture>
+			<ButtonText>
+				<Anchors>
+					<Anchor point="CENTER">
+						<Offset>
+							<AbsDimension x="0" y="0" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</ButtonText>
+			<NormalFont style="GameFontHighlight"/>
+			<HighlightFont style="GameFontNormal" />
+		</Button>
+	<Button name="RIO_GuildEntry" virtual="true" hidden="true">
+		<Size>
+			<AbsDimension x="210" y="18" />
+		</Size>
+		<Layers>
+			<Layer>
+				<FontString name="$parentName" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="80" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT">
+							<Offset>
+								<AbsDimension x="4"	y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</FontString>
+				<FontString name="$parentRank" inherits="GameFontNormalSmall" justifyH="LEFT">
+					<Size>
+						<AbsDimension x="80" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentName" relativePoint="RIGHT" />
+					</Anchors>
+				</FontString>
+				<Texture name="$parentCheck" file="Interface\BUTTONS\UI-CheckBox-Check" hidden="true">
+					<Size>
+						<AbsDimension x="20" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentRank" relativePoint="RIGHT" />
+					</Anchors>
+				</Texture>
+				<Texture name="$parentStatus" file="">
+					<Size>
+						<AbsDimension x="20" y="18" />
+					</Size>
+					<Anchors>
+						<Anchor point="LEFT" relativeTo="$parentCheck" relativePoint="RIGHT">
+							<Offset>
+								<AbsDimension x="1" y="0" />
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				_G[self:GetName().."BG"]:Hide()
+			</OnLoad>
+			<OnEnter>
+				_G[self:GetName().."BG"]:Show()
+			</OnEnter>
+			<OnLeave>
+				_G[self:GetName().."BG"]:Hide()
+			</OnLeave>
+			<OnClick>
+				RIOMain_Browser.selectRow(self:GetID());
+			</OnClick>
+		</Scripts>
+		<NormalTexture name="$parentBG">
+			<Color r="0" g="0" b="0.6" a="0.35" />
+		</NormalTexture>
+	</Button>
+		<Button name="RIO_Mod_MinimapButton" parent="Minimap" enableMouse="true" movable="true" hidden="false">
+		<Size>
+			<AbsDimension x="33" y="33"/>
+		</Size>
+		<Anchors>
+			<Anchor point="TOPLEFT"/>
+		</Anchors>
+		<Layers>
+			<Layer level="BACKGROUND">
+				<Texture name="RIO_Mod_MinimapButton_Icon" file="Interface\Icons\Spell_unused2">
+					<Size>
+						<AbsDimension x="21" y="21"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT">
+							<Offset>
+								<AbsDimension x="7" y="-6"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+			<Layer level="OVERLAY">
+				<Texture file="Interface\Minimap\MiniMap-TrackingBorder">
+					<Size>
+						<AbsDimension x="56" y="56"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPLEFT"/>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Frames>
+			<Frame name="RIO_Mod_MinimapButton_DraggingFrame" hidden="true">
+				<Scripts>
+					<OnUpdate>
+						RIO_Mod_MinimapButton_DraggingFrame_OnUpdate()
+					</OnUpdate>
+				</Scripts>
+			</Frame>
+		</Frames>
+		<HighlightTexture alphaMode="ADD" file="Interface\Minimap\UI-Minimap-ZoomButton-Highlight"/>
+		<Scripts>
+			<OnLoad>
+				self:RegisterForClicks("LeftButtonUp","RightButtonUp")
+				self:RegisterForDrag("LeftButton","RightButton")
+			</OnLoad>
+			<OnDragStart>
+				self:LockHighlight()
+				RIO_Mod_MinimapButton_DraggingFrame:Show()
+			</OnDragStart>
+			<OnDragStop>
+				self:UnlockHighlight()
+				RIO_Mod_MinimapButton_DraggingFrame:Hide()
+			</OnDragStop>
+			<OnClick>
+				RIO_Mod_MinimapButton_OnClick() -- do your thing in here, arg1 is mouse button clicked
+			</OnClick>
+			<OnEnter>
+				RIO_Mod_MinimapButton_OnEnter(self)
+			</OnEnter>
+			<OnLeave>
+				GameTooltip:Hide()
+			</OnLeave>
+		</Scripts>
+	</Button>
+	<Frame name="RIO_MainFrame" parent="UIParent" hidden="true" enablemouse="true" movable="true" frameStrata="DIALOG">
+		<Size>
+			<AbsDimension x="396" y="424" />
+		</Size>
+		<Anchors>
+			<Anchor point="CENTER" relativePoint="CENTER" relativeTo="UIParent" />
+		</Anchors>
+		<Backdrop
+			   bgFile="Interface\DialogFrame\UI-DialogBox-Background-Dark"
+			   edgeFile="Interface\DialogFrame\UI-DialogBox-Border"
+			   tile="true">
+			   <BackgroundInsets>
+				   <AbsInset left="11" right="12" top="12" bottom="11"/>
+			   </BackgroundInsets>
+			   <TileSize>
+				   <AbsValue val="32"/>
+			   </TileSize>
+			   <EdgeSize>
+				   <AbsValue val="32"/>
+			   </EdgeSize>
+		</Backdrop>
+		<Frames>
+			<Frame name="RIO_TabPage1">
+				<Anchors>
+					<Anchor point="TOPLEFT"/>
+                	<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<Frames>
+					<Frame name="RIO_GuildMemberFrame">
+						<Size>
+							<AbsDimension x="218" y="392" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="16" y="-16" />
+							</Anchor>
+						</Anchors>
+						<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+							<TileSize>
+								<AbsValue val="16" />
+							</TileSize>
+							<EdgeSize>
+								<AbsValue val="16" />
+							</EdgeSize>
+						</Backdrop>
+						<Frames>
+							<Button name="$parentHeaderName" inherits="RIO_GuildHeader" id="1" text="Name">
+								<Size>
+									<AbsDimension x="80" y="24" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset x="4" y="-3" />
+									</Anchor>
+								</Anchors>
+							</Button>
+							<Button name="$parentHeaderRank" inherits="RIO_GuildHeader" id="2" text="Rank">
+								<Size>
+									<AbsDimension x="80" y="24" />
+								</Size>
+								<Anchors>
+									<Anchor point="LEFT" relativeTo="$parentHeaderName" relativePoint="RIGHT" />
+								</Anchors>
+							</Button>
+							<Button name="$parentHeaderSelected" inherits="RIO_GuildHeader" id="3" text="">
+								<Size>
+									<AbsDimension x="21" y="24" />
+								</Size>
+								<Anchors>
+									<Anchor point="LEFT" relativeTo="$parentHeaderRank" relativePoint="RIGHT" />
+								</Anchors>
+							</Button>
+							<Button name="$parentHeaderStatus" inherits="RIO_GuildHeader" id="4" text="">
+								<Size>
+									<AbsDimension x="29" y="24" />
+								</Size>
+								<Anchors>
+									<Anchor point="LEFT" relativeTo="$parentHeaderSelected" relativePoint="RIGHT" />
+								</Anchors>
+							</Button>
+						</Frames>
+						<Scripts>
+							<OnMouseWheel>
+								RIOMain_Browser.quickScroll(self, delta)
+							</OnMouseWheel>
+						</Scripts>
+					</Frame>
+					<Frame name="RIO_SliderContainer">
+						<Size>
+							<AbsDimension x="23"/>
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPRIGHT" relativeTo="RIO_GuildMemberFrame">
+								<Offset x="1" y="3"/>
+							</Anchor>
+							<Anchor point="BOTTOMLEFT" relativePoint="BOTTOMRIGHT" relativeTo="RIO_GuildMemberFrame">
+								<Offset x="1" y="-3"/>
+							</Anchor>
+						</Anchors>
+						<Frames>
+							<Slider name="RIO_GuildSlider" minValue="0" maxValue="100" valueStep="1">
+								<Size>
+									<AbsDimension x="18" y="353"/>
+								</Size>
+								<Anchors>
+									<Anchor point="CENTER" relativePoint="CENTER">
+										<Offset x="1" y="-1" />
+									</Anchor>
+								</Anchors>
+								<Frames>
+									<Button name="$parentScrollUpButton" inherits="UIPanelScrollUpButtonTemplate">
+										<Anchors>
+											<Anchor point="BOTTOM" relativePoint="TOP"/>
+										</Anchors>
+										<Scripts>
+											<OnClick>
+												RIOMain_Browser.sliderButtonPushed(1);
+											</OnClick>
+										</Scripts>
+									</Button>
+									<Button name="$parentScrollDownButton" inherits="UIPanelScrollDownButtonTemplate">
+										<Anchors>
+											<Anchor point="TOP" relativePoint="BOTTOM"/>
+										</Anchors>
+										<Scripts>
+											<OnClick>
+												RIOMain_Browser.sliderButtonPushed(2);
+											</OnClick>
+										</Scripts>
+									</Button>
+								</Frames>
+								<Scripts>
+									<OnValueChanged>
+										RIO_totalGuildOffset = self:GetValue();
+										RIOMain_Browser.updateListing();
+									</OnValueChanged>
+								</Scripts>
+								<ThumbTexture name="$parentThumbTexture" inherits="UIPanelScrollBarButton" file="Interface\Buttons\UI-ScrollBar-Knob">
+									<Size>
+										<AbsDimension x="16" y="16"/>
+									</Size>
+									<!--TexCoords left="0.20" right="0.80" top="0.125" bottom="0.875"/-->
+								</ThumbTexture>
+							</Slider>
+						</Frames>
+						<Backdrop edgeFile="Interface\Buttons\UI-SliderBar-Border" bgFile="Interface\Buttons\UI-SliderBar-Background" tile="true">
+							<EdgeSize>
+								<AbsValue val="8" />
+							</EdgeSize>
+							<TileSize>
+								<AbsValue val="8" />
+							</TileSize>
+							<BackgroundInsets>
+								<AbsInset left="3" right="3" top="6" bottom="6" />
+							</BackgroundInsets>
+						</Backdrop>
+					</Frame>
+
+					<Button name="RIO_SelectAll" inherits="UIPanelButtonTemplate" text="Select All">
+						<Size>
+							<AbsDimension x="121" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="263" y="-30" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.selectAll();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="RIO_SelectNone" inherits="UIPanelButtonTemplate" text="Select None">
+						<Size>
+							<AbsDimension x="121" y="20" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="263" y="-51" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.clearSelection();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<CheckButton name="RIO_ShowOfflineBox" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-68" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.offlineBoxToggle()
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank1" inherits="UICheckButtonTemplate" text="" id="1">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-96" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank2" inherits="UICheckButtonTemplate" text="" id="2">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-124" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank3" inherits="UICheckButtonTemplate" text="" id="3">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-152" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank4" inherits="UICheckButtonTemplate" text="" id="4">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-180" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank5" inherits="UICheckButtonTemplate" text=""  id="5">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-208" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank6" inherits="UICheckButtonTemplate" text="" id="6">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-236" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank7" inherits="UICheckButtonTemplate" text="" id="7">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-264" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank8" inherits="UICheckButtonTemplate" text="" id="8">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-292" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank9" inherits="UICheckButtonTemplate" text="" id="9">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-320" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_ShowRank10" inherits="UICheckButtonTemplate" text="" id="10">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="262" y="-348" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.rankBoxToggle(self:GetID())
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Button name="RIO_SendMassInvites" inherits="UIPanelButtonTemplate" text="Mass Invite">
+						<Size>
+							<AbsDimension x="121" y="30" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="263" y="-378" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIOMain_Browser.sendMassGuildInvite();
+							</OnClick>
+						</Scripts>
+		
+					</Button>
+				</Frames>
+			</Frame>
+			<Frame name="RIO_TabPage2">
+				<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<Frames>
+					<Button name="RIO_CodeWordsContainer">
+						<Size x="140" y="357" />
+						<Anchors>
+							<Anchor point="TOPLEFT">
+								<Offset x="16" y="-16" />
+							</Anchor>
+						</Anchors>
+						<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+							<TileSize>
+								<AbsValue val="16" />
+							</TileSize>
+							<EdgeSize>
+								<AbsValue val="16" />
+							</EdgeSize>
+						</Backdrop>
+						<Scripts>
+							<OnClick>
+								RIO_CodeWordEditBox:SetFocus();
+								RIO_CodeWordEditBox:SetCursorPosition(RIO_CodeWordEditBox:GetNumLetters());
+							</OnClick>
+						</Scripts>
+						<Frames>
+							<Button name="$parentHeaderCodeword" inherits="RIO_CodeHeader" id="1" text="Codewords">
+								<Size>
+									<AbsDimension x="132" y="24" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset x="4" y="-3" />
+									</Anchor>
+								</Anchors>
+							</Button>
+							<Editbox name="RIO_CodeWordEditBox" multiLine="true" parentKey="input" autoFocus="false" spacing="1">
+								<Size x="131" y="350" />
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset x="4" y="-28" />
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnEscapePressed>
+										self:ClearFocus()
+									</OnEscapePressed>								
+								</Scripts>
+								<FontString inherits="GameFontHighlight"/>
+							</Editbox>
+						</Frames>
+					</Button>
+					<Button name="RIO_SaveCodeWordList" inherits="UIPanelButtonTemplate" text="Save Codewords">
+						<Size>
+							<AbsDimension x="136" y="30" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="18" y="-378" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIO_CodeWordEditBox:ClearFocus();
+								RIOMain_Browser.saveCodeWords();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Button name="RIO_ToggleCodewordInvites" inherits="UIPanelButtonTemplate" text="Start Codeword Invitations">
+						<Size>
+							<AbsDimension x="215" y="30" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="163" y="-378" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIO_CodeWordEditBox:ClearFocus();
+								RIOMain_Browser.toggleCodewordInvites();
+							</OnClick>
+						</Scripts>
+					</Button>
+					<Editbox name="RIO_MinutesListener" inherits="InputBoxTemplate" autoFocus="false">
+						<Size>
+							<AbsDimension x="28" y="30" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="244" y="-34" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self:SetMaxLetters(3);
+								self:SetNumeric(true);
+							</OnLoad>
+							<OnEscapePressed>
+								self:ClearFocus()
+							</OnEscapePressed>		
+							<OnEnterPressed>
+								self:ClearFocus()
+								<!-- RIOMain_Browser.saveMinutes(); -->
+							</OnEnterPressed>
+							<OnTabPressed>
+								RIO_SecondsListener:SetFocus();
+							</OnTabPressed>
+						</Scripts>
+					</Editbox>
+					<Editbox name="RIO_SecondsListener" inherits="InputBoxTemplate" autoFocus="false">
+						<Size>
+							<AbsDimension x="28" y="30" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="352" y="-34" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self:SetMaxLetters(2);
+								self:SetNumeric(true);
+							</OnLoad>
+							<OnEscapePressed>
+								self:ClearFocus()
+							</OnEscapePressed>		
+							<OnEnterPressed>
+								self:ClearFocus()
+								<!-- RIOMain_Browser.saveSeconds(); -->
+							</OnEnterPressed>
+							<OnTabPressed>
+								self:ClearFocus();
+							</OnTabPressed>
+						</Scripts>
+					</Editbox>
+					<CheckButton name="RIO_GuildMessageAtStart" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="170" y="-122" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self:GetChecked() then
+									RIO_SendGuildMsg = true
+								else
+									RIO_SendGuildMsg = false;
+								end
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_NotifyWhenTimerDone" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="170" y="-162" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self:GetChecked() then
+									RIO_NotifyWhenDone = true
+								else
+									RIO_NotifyWhenDone = false;
+								end
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_AlwaysInviteListen" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="170" y="-242" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self:GetChecked() then
+									RIO_AlwaysOn = true
+								else
+									RIO_AlwaysOn = false;
+								end
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_OnlyGuildMembers" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="170" y="-202" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self:GetChecked() then
+									RIO_GuildWhispersOnly = true
+								else
+									RIO_GuildWhispersOnly = false;
+								end
+							</OnClick>
+						</Scripts>
+					</CheckButton>
+					<Button name="RIO_InviteTextContainer">
+						<Size x="415" y="100" />
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT" relativeTo="RIO_SaveCodeWordList">
+								<Offset x="0" y="-32" />
+							</Anchor>
+						</Anchors>
+						<Backdrop edgeFile="Interface\Tooltips\UI-Tooltip-Border" tile="true">
+							<TileSize>
+								<AbsValue val="16" />
+							</TileSize>
+							<EdgeSize>
+								<AbsValue val="16" />
+							</EdgeSize>
+						</Backdrop>
+						<Scripts>
+							<OnClick>
+								RIO_InviteTextEditBox:SetFocus();
+								RIO_InviteTextEditBox:SetCursorPosition(RIO_InviteTextEditBox:GetNumLetters());
+							</OnClick>
+						</Scripts>
+						<Frames>
+							<Button name="$parentHeaderInviteText" inherits="RIO_CodeHeader" id="1" text="Invite Text">
+								<Size>
+									<AbsDimension x="407" y="24" />
+								</Size>
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset x="4" y="-3" />
+									</Anchor>
+								</Anchors>
+							</Button>
+							<Editbox name="RIO_InviteTextEditBox" multiLine="true" parentKey="input" autoFocus="false" spacing="1">
+								<Size x="406" y="350" />
+								<Anchors>
+									<Anchor point="TOPLEFT">
+										<Offset x="4" y="-28" />
+									</Anchor>
+								</Anchors>
+								<Scripts>
+									<OnEscapePressed>
+										local txt = strtrim(self:GetText())
+										if txt == "" then
+											txt = RIO_DefaultInviteText
+										elseif string.find(txt, "%%s") == nil then
+											txt = txt.." %s"
+										end
+										RIO_InvText = txt
+										self:SetText(RIO_InvText)
+										self:ClearFocus()
+									</OnEscapePressed>
+								</Scripts>
+								<FontString inherits="GameFontHighlight"/>
+							</Editbox>
+						</Frames>
+					</Button>
+				</Frames>
+				<Layers>
+					<Layer>
+						<FontString name="$parent_TimerLabel" inherits="GameFontHighlight" justifyH="LEFT" justifyV="TOP" text="Codeword Timer:">
+							<Size>
+								<AbsDimension x="200" y="200" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset x="163" y="-20" />
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="72" />
+							</FontHeight>
+						</FontString>
+						<FontString name="$parent_MinutesLabel" inherits="GameFontNormal" justifyH="LEFT" text="Minutes:">
+							<Size>
+								<AbsDimension x="80" y="30" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset x="180" y="-34" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parent_SecondsLabel" inherits="GameFontNormal" justifyH="LEFT" text="Seconds:">
+							<Size>
+								<AbsDimension x="80" y="30" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset x="288" y="-34" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+						<FontString name="$parent_EmptyLabel" inherits="GameFontDisableSmall" justifyH="LEFT" justifyV="TOP" text="Set both fields to 0 to start codeword invitations without timer.">
+							<Size>
+								<AbsDimension x="200" y="200" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset x="163" y="-62" />
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="72" />
+							</FontHeight>
+						</FontString>
+						<FontString name="$parent_EmptyLabel" inherits="GameFontDisableSmall" justifyH="LEFT" justifyV="TOP" text="Type Each Codeword on a new line.|nCodewords are not case sensitive.">
+							<Size>
+								<AbsDimension x="200" y="200" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset x="163" y="-300" />
+								</Anchor>
+							</Anchors>
+							<FontHeight>
+								<AbsValue val="72" />
+							</FontHeight>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Frame name="RIO_TabPage3">
+				<Anchors>
+						<Anchor point="TOPLEFT"/>
+						<Anchor point="BOTTOMRIGHT"/>
+				</Anchors>
+				<Frames>
+				<CheckButton name="RIO_ShowMinimapIconConfig" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="16" y="-16" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self:GetChecked() then
+									RIO_MinimapShow = true
+									RIO_Mod_MinimapButton:Show();
+									RIO_Mod_MinimapButton_Reposition()
+								else
+									RIO_MinimapShow = false;
+									RIO_Mod_MinimapButton:Hide();
+								end
+							</OnClick>
+							<OnLoad>
+								_G["RIO_ShowMinimapIconConfigText"]:SetText("Minimap Icon");
+								self:SetChecked(RIO_MinimapShow);
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_AutoSet25manBox" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="16" y="-48" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self:GetChecked() then
+									RIO_AutoSet25man = true
+								else
+									RIO_AutoSet25man = false;
+								end
+							</OnClick>
+							<OnLoad>
+								_G["RIO_AutoSet25manBoxText"]:SetText("Automatically Set To |cFFFFFFFF25-man|r after |cFFFFFFFF17 players|r join");
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_AutoSetDifficultyBox" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="16" y="-80" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self:GetChecked() then
+									RIO_AutoSetDifficulty = true
+									_G["RIO_AutoSetDifficultyNormalRadioText"]:SetText("Normal");
+									_G["RIO_AutoSetDifficultyHeroicRadioText"]:SetText("Heroic");
+									RIO_AutoSetDifficultyNormalRadio:Enable();
+									RIO_AutoSetDifficultyHeroicRadio:Enable();
+									if RIO_AutoDifficultySetting == 1 then
+										RIO_AutoSetDifficultyNormalRadio:SetChecked(false);
+										RIO_AutoSetDifficultyHeroicRadio:SetChecked(true);
+									else
+										RIO_AutoSetDifficultyNormalRadio:SetChecked(true);
+										RIO_AutoSetDifficultyHeroicRadio:SetChecked(false);
+									end	
+								else
+									RIO_AutoSetDifficulty = false;
+									RIO_AutoSetDifficultyNormalRadio:SetChecked(false);
+									RIO_AutoSetDifficultyHeroicRadio:SetChecked(false);
+									RIO_AutoSetDifficultyNormalRadio:Disable();
+									RIO_AutoSetDifficultyHeroicRadio:Disable();
+									_G["RIO_AutoSetDifficultyNormalRadioText"]:SetText("|cFF888888Normal|r");
+									_G["RIO_AutoSetDifficultyHeroicRadioText"]:SetText("|cFF888888Heroic|r");
+								end
+							</OnClick>
+							<OnLoad>
+								_G["RIO_AutoSetDifficultyBoxText"]:SetText("Automatically Set Raid Difficulty");
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_AutoSetDifficultyNormalRadio" inherits="UIRadioButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="265" y="-88" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+									RIO_AutoSetDifficultyHeroicRadio:SetChecked(false);
+									RIO_AutoDifficultySetting = 0;
+							</OnClick>
+							<OnLoad>
+								_G[self:GetName().."Text"]:SetText("Normal");
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_AutoSetDifficultyHeroicRadio" inherits="UIRadioButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="350" y="-88" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								RIO_AutoSetDifficultyNormalRadio:SetChecked(false);
+								RIO_AutoDifficultySetting = 1;
+							</OnClick>
+							<OnLoad>
+								_G[self:GetName().."Text"]:SetText("Heroic");
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<CheckButton name="RIO_AutoSetMasterLooter" inherits="UICheckButtonTemplate" text="">
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="16" y="-112" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnClick>
+								if self:GetChecked() then
+									RIO_MasterLooter = true
+								else
+									RIO_MasterLooter = false;
+								end
+							</OnClick>
+							<OnLoad>
+								_G["RIO_AutoSetMasterLooterText"]:SetText("Automatically Set To |cFFFFFFFFMaster Looter|r");
+							</OnLoad>
+						</Scripts>
+					</CheckButton>
+					<Editbox name="RIO_ScaleInputThing" inherits="InputBoxTemplate" autoFocus="false">
+						<Size>
+							<AbsDimension x="38" y="30" />
+						</Size>
+						<Anchors>
+							<Anchor point="TOPLEFT" relativePoint="TOPLEFT">
+								<Offset x="122" y="-138" />
+							</Anchor>
+						</Anchors>
+						<Scripts>
+							<OnLoad>
+								self:SetMaxLetters(4);
+							</OnLoad>
+							<OnEscapePressed>
+								self:ClearFocus()
+							</OnEscapePressed>		
+							<OnEnterPressed>
+								self:ClearFocus()
+								RIOMain_Browser.setScale();
+							</OnEnterPressed>
+							<OnTabPressed>
+								self:ClearFocus();
+							</OnTabPressed>
+							<OnValueChanged>
+								RIOMain_Browser.setScale()
+							</OnValueChanged>
+						</Scripts>
+					</Editbox>
+				</Frames>
+				<Layers>
+					<Layer>
+						<FontString name="RIO_ScaleInputThingLabel" inherits="GameFontNormal" justifyH="LEFT" text="Frame Scale:">
+							<Size>
+								<AbsDimension x="180" y="30" />
+							</Size>
+							<Anchors>
+								<Anchor point="TOPLEFT">
+									<Offset x="16" y="-136" />
+								</Anchor>
+							</Anchors>
+						</FontString>
+					</Layer>
+				</Layers>
+			</Frame>
+			<Button name="$parentTab1" text="Guild Invitations" inherits="CharacterFrameTabButtonTemplate" id="1">
+				<!--Size x="118" y="35" /-->
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="BOTTOMLEFT">
+						<Offset x="70" y="-10" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RIO_MainFrame:SetHeight(RIO_MainFrameHeight)
+						PanelTemplates_SetTab(RIO_MainFrame, 1);
+						RIO_TabPage1:Show();
+						RIO_TabPage3:Hide()
+						RIO_TabPage2:Hide();
+						RIOMain_Browser.selectTab(1);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTab2" text="Codeword Invitations" inherits="CharacterFrameTabButtonTemplate" id="2">
+				<!--Size x="118" y="35" /-->
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="BOTTOMLEFT">
+						<Offset x="200" y="-10" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RIO_MainFrame:SetHeight(RIO_MainFrameHeight+100)
+						PanelTemplates_SetTab(RIO_MainFrame, 2);
+						RIO_TabPage2:Show();
+						RIO_TabPage3:Hide()
+						RIO_TabPage1:Hide();
+						RIOMain_Browser.selectTab(2);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="$parentTab3" text="General Options" inherits="CharacterFrameTabButtonTemplate" id="3">
+				<!--Size x="118" y="35" /-->
+				<Anchors>
+					<Anchor point="CENTER" relativePoint="BOTTOMLEFT">
+						<Offset x="328" y="-10" />
+					</Anchor>
+				</Anchors>
+				<Scripts>
+					<OnClick>
+						RIO_MainFrame:SetHeight(RIO_MainFrameHeight)
+						PanelTemplates_SetTab(RIO_MainFrame, 3);
+						RIO_TabPage3:Show()
+						RIO_TabPage2:Hide();
+						RIO_TabPage1:Hide();
+						RIOMain_Browser.selectTab(3);
+					</OnClick>
+				</Scripts>
+			</Button>
+			<Button name="RIO_CloseButtonThing" inherits="UIPanelCloseButton">
+				<Anchors>
+					<Anchor point="TOPRIGHT" relativePoint="TOPRIGHT" relativeTo="RIO_MainFrame">
+						<Offset>
+							<AbsDimension x="-1" y="-2" />
+						</Offset>
+					</Anchor>
+				</Anchors>
+			</Button>
+		</Frames>
+		<Layers>
+			<Layer level="ARTWORK">
+				<Texture name="$parentCorner" file="Interface\DialogFrame\UI-DialogBox-Corner">
+					<Size>
+						<AbsDimension x="32" y="32"/>
+					</Size>
+					<Anchors>
+						<Anchor point="TOPRIGHT">
+							<Offset>
+								<AbsDimension x="-6" y="-7"/>
+							</Offset>
+						</Anchor>
+					</Anchors>
+				</Texture>
+			</Layer>
+		</Layers>
+		<Scripts>
+			<OnLoad>
+				RIOMainFrame_OnLoad();
+    	        PanelTemplates_SetNumTabs(RIO_MainFrame, 3);
+	            PanelTemplates_SetTab(RIO_MainFrame, 1);
+				self:RegisterForDrag("LeftButton");
+			</OnLoad>
+			<OnDragStart>
+				self:StartMoving()
+		  	</OnDragStart>
+			<OnDragStop>
+		        self:StopMovingOrSizing()
+		    </OnDragStop>
+			<OnShow>
+				PanelTemplates_SetTab(RIO_MainFrame, 1);
+    	        RIO_TabPage1:Show()
+        	    RIO_TabPage2:Hide()
+				RIO_TabPage3:Hide()
+				RIOMainFrame_OnShow();
+			</OnShow>
+		</Scripts>
+	</Frame>
+</Ui>

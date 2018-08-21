@@ -1,0 +1,10 @@
+## Interface: 30300
+## Title: Raid Invite Organizer
+## Author: Areasis, Matthew "Blacksen" Enthoven
+## Notes: Attempts to help guild and raid leaders automate the invitation process.
+## Version: 1.0.5
+## SavedVariables: RIO_InvText, RIO_displayRanksMaster, RIO_ShowOfflineMaster, RIO_CodeWordString, RIO_SendGuildMsg, RIO_NotifyWhenDone, RIO_GuildWhispersOnly, RIO_AlwaysOn, RIO_MinimapPos, RIO_AutoSetDifficulty, RIO_AutoDifficultySetting, RIO_MasterLooter, RIO_MinimapShow, RIO_AutoSet25man, RIO_MainFrameScale
+
+globals.lua
+core.lua
+MainFrame.xml
